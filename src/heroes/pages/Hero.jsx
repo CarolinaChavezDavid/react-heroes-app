@@ -1,12 +1,16 @@
-import React from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import React, { useMemo } from 'react'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getHeroById } from '../helpers/getHeroById';
 
 export const Hero = () => {
 
     const {id} = useParams();
-    const hero = getHeroById(id)
+    const navigate = useNavigate();
+    const hero = useMemo(() => getHeroById(id), [id]);
     const heroImageUrl =  `/src/assets/heroes/${id}.jpg`;
+    const onNavigateBack = () => {
+        navigate(-1)
+    }
 
 
     if(!hero) {
@@ -19,7 +23,7 @@ export const Hero = () => {
             <img 
                 src ={heroImageUrl}
                 alt= { hero.superhero}
-                className='img-thumbnail'
+                className='img-thumbnail animate__animated animate__fadeInLeft'
             />
         </div>
         <div className='col-8'>
@@ -32,8 +36,12 @@ export const Hero = () => {
 
             <h5 className='mt-3'>Characters</h5>
             <p>{hero.character}</p>
+            <button
+                className='btn btn-outline-primary'
+                onClick={onNavigateBack}>
+                Back
+            </button>
         </div>
-
     </ div>
   )
 }
