@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-const onLogin = () => {};
+const onLogin = () => {}
 
 export const LoginPage = () => {
   return (
@@ -12,5 +12,5 @@ export const LoginPage = () => {
         Login
       </button>
     </div>
-  );
-};
+  )
+}
